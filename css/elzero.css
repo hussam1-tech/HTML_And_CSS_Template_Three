@@ -1479,8 +1479,15 @@ header .parent-ul .links ul i {
   box-shadow: var(--box-shadow, 0 0 4px 0 #ccc);
   position: relative;
 }
-.plans .cards .card.two {
+@media (max-width: 767px) {
+  .plans .cards .card:not(:last-child) {
+  margin-bottom: 10px;
+}
+}
+@media (min-width: 768px) {
+  .plans .cards .card.two {
   margin: -20px 0 20px;
+}
 }
 .plans .cards .card::before,
 .plans .cards .card::after {
