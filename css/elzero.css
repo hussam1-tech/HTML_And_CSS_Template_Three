@@ -23,6 +23,15 @@ html {
 body {
   font-family: "Cairo", sans-serif;
 }
+.progress-page {
+  position: fixed;
+  top: 0;
+  height: 3px;
+  width: 0;
+  background-color: #2196f3;
+  transition: var(--transition-time);
+  z-index: 9999;
+}
 ul {
   list-style: none;
 }
@@ -65,15 +74,29 @@ a {
   margin-bottom: 80px;
   text-transform: uppercase;
   z-index: 2;
+  transition: 0.3s linear 0.5s;
 }
 .special-heading:hover {
-  animation: color 0.3s linear 0.5s both;
+  color: #fff;
+  border-color: #fff;
+}
+.special-heading::before,
+.special-heading::after {
+  transition: 0.5s linear;
 }
 .special-heading:hover::before {
-  animation: enter-l 0.5s linear both;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  z-index: -1;
 }
 .special-heading:hover::after {
-  animation: enter-r 0.5s linear both;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0;
+  z-index: -1;
 }
 .special-heading::before,
 .special-heading::after {
@@ -92,48 +115,6 @@ a {
 .special-heading::after {
   right: -40px;
 }
-@keyframes enter-l {
-  0% {
-    left: -40px;
-  }
-  50% {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    left: 0;
-  }
-  100% {
-    left: 0;
-    width: 50%;
-    height: 100%;
-    border-radius: 0;
-    z-index: -1;
-  }
-}
-@keyframes enter-r {
-  0% {
-    right: -40px;
-  }
-  50% {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    right: 0;
-  }
-  100% {
-    right: 0;
-    width: 50%;
-    height: 100%;
-    border-radius: 0;
-    z-index: -1;
-  }
-}
-@keyframes color {
-  to {
-    color: #fff;
-    border-color: #fff;
-  }
-}
 .special-heading2 {
   font-size: 40px;
   width: fit-content;
@@ -145,13 +126,14 @@ a {
   position: relative;
 }
 .spikes::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 30px;
-  background-image: linear-gradient(135deg, white 25%, transparent 25%), linear-gradient(225deg, white 25%, transparent 25%);
+  background-image: linear-gradient(135deg, white 25%, transparent 25%),
+    linear-gradient(225deg, white 25%, transparent 25%);
   background-size: 40px 40px;
 }
 .dots img:first-child {
@@ -270,7 +252,7 @@ header .parent-ul .links {
     width: 1170px;
   }
 }
-header .parent-ul > li:last-of-type:hover + .links {
+header .parent-ul .links.active {
   z-index: 1;
   opacity: 1;
   top: calc(100% + 1px);
@@ -826,7 +808,7 @@ header .parent-ul .links ul i {
   height: 100%;
   background-color: #f3f3f3;
   border-radius: 8px;
-  transition: var(--transition-time, 0.3s)
+  transition: var(--transition-time, 0.3s);
 }
 .members .card::after {
   content: "";
@@ -996,27 +978,6 @@ header .parent-ul .links ul i {
   position: relative;
 }
 .skills .skills-content .con div::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80%;
-  height: 100%;
-  background-color: var(--main-color, #2196f3);
-}
-.skills .skills-content .one div::before {
-  width: 80%;
-}
-.skills .skills-content .two div::before {
-  width: 85%;
-}
-.skills .skills-content .three div::before {
-  width: 70%;
-}
-.skills .skills-content .four div::before {
-  width: 80%;
-}
-.skills .skills-content .con div::after {
   content: attr(data-text);
   position: absolute;
   top: -26px;
@@ -1030,6 +991,15 @@ header .parent-ul .links ul i {
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+.skills .skills-content .con div span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--main-color, #2196f3);
+  transition: ease 0.5s;
 }
 /* End Skills */
 /* Start How */
@@ -1222,7 +1192,7 @@ header .parent-ul .links ul i {
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
-  transition: var(--transition-time, .3s);
+  transition: var(--transition-time, 0.3s);
 }
 .events .email input[type="submit"]:hover {
   background-color: var(--alt-main-color, #1787e0);
@@ -1267,8 +1237,8 @@ header .parent-ul .links ul i {
 }
 @media (min-width: 1200px) {
   .plans .cards .card.two {
-  transform: translateY(-20px);
-}
+    transform: translateY(-20px);
+  }
 }
 .plans .cards .card::before,
 .plans .cards .card::after {
@@ -1309,7 +1279,7 @@ header .parent-ul .links ul i {
   margin-right: auto;
 }
 .plans .cards .card span.popular {
-position: absolute;
+  position: absolute;
   top: 0;
   right: 20px;
   height: 150px;
@@ -1344,7 +1314,7 @@ position: absolute;
 }
 .plans .cards .card ul li::before {
   font-family: "Font Awesome 6 Free";
-  content: '\f00c';
+  content: "\f00c";
   font-weight: 900;
   margin-right: 10px;
   color: var(--main-color);
@@ -1521,11 +1491,12 @@ position: absolute;
   flex-basis: 50%;
 }
 @keyframes change-background {
-  0%, 100% {
-  background-image: url(../images/discount-background1.jpg);
+  0%,
+  100% {
+    background-image: url(../images/discount-background1.jpg);
   }
   50% {
-  background-image: url(../images/discount-background2.jpg);
+    background-image: url(../images/discount-background2.jpg);
   }
 }
 .discount .annoucement::before {
@@ -1591,7 +1562,7 @@ position: absolute;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  transition: var(--transition-time, .3s);
+  transition: var(--transition-time, 0.3s);
 }
 .discount .order input[type="submit"]:hover {
   background-color: var(--alt-main-color, #1787e0);
