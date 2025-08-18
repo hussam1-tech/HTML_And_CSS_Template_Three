@@ -1,5 +1,5 @@
 let progressInPage = document.querySelector(".progress-page");
-let linksLi = document.querySelector("header nav .menu");
+let linksAnc = document.querySelector("header nav .more");
 let links = document.querySelector("header nav .links");
 let skillsSection = document.querySelector(".skills");
 let progSpans = document.querySelectorAll(".skills .con span");
@@ -11,13 +11,17 @@ let statsSection = document.querySelector(".stats");
 let statsSpans = document.querySelectorAll(".stats .card span");
 let height =
   document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  let startProg = false;
-  let startSpans = false;
-  let duration = 2000;
-  let finalDate = new Date("Jan 1, 2028");
-  linksLi.onclick = () => {
+let startProg = false;
+let startSpans = false;
+let duration = 2000;
+let finalDate = new Date("Jan 1, 2028");
+window.addEventListener("click", (e) => {
+  if (e.target === linksAnc) {
     links.classList.toggle("active");
+  } else {
+    if (links.classList.contains("active")) links.classList.remove("active");
   }
+});
 let timer = setInterval(() => {
   let today = new Date();
   let waitingTime = finalDate - today;
@@ -38,24 +42,24 @@ window.onscroll = () => {
   }%`;
   if (skillsSection.offsetTop - 350 < window.scrollY) {
     if (!startProg) {
-        startProg = true;
-        progSpans.forEach(prog => {
-            prog.style.width = prog.dataset.text;
-        })
+      startProg = true;
+      progSpans.forEach((prog) => {
+        prog.style.width = prog.dataset.text;
+      });
     }
   }
   if (statsSection.offsetTop - 350 < window.scrollY) {
     if (!startSpans) {
-        startSpans = true;
-        statsSpans.forEach(span => {
-            let goal = span.dataset.num;
-            let counter = setInterval(() => {
-                span.textContent++;
-                if (span.textContent == goal) {
-                    clearInterval(counter);
-                }
-            }, duration / goal)
-        })
+      startSpans = true;
+      statsSpans.forEach((span) => {
+        let goal = span.dataset.num;
+        let counter = setInterval(() => {
+          span.textContent++;
+          if (span.textContent == goal) {
+            clearInterval(counter);
+          }
+        }, duration / goal);
+      });
     }
   }
 };
