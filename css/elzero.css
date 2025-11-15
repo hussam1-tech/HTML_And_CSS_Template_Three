@@ -146,6 +146,10 @@ a {
   bottom: 200px;
   left: 0;
 }
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
 /* End Components */
 /* Start Header */
 header {
@@ -1404,8 +1408,9 @@ header .parent-ul .links ul i {
 .stats {
   padding-top: var(--section-padding, 100px);
   padding-bottom: var(--section-padding, 100px);
-  background-image: url(../images/stats.jpg);
+  background-image: url(../images/stats.webp);
   background-size: cover;
+  background-position: center;
   position: relative;
 }
 .stats::before {
@@ -1484,16 +1489,17 @@ header .parent-ul .links ul i {
 .discount .annoucement {
   padding-top: calc(var(--section-padding, 100px) / 2);
   padding-bottom: calc(var(--section-padding, 100px) / 2);
-  background-image: url(../images/discount-background1.jpg);
+  background-image: url(../images/discount-background1.webp);
   animation: change-background 10s infinite linear;
   background-size: cover;
+  background-position: center;
   position: relative;
   flex-basis: 50%;
 }
 @keyframes change-background {
   0%,
   100% {
-    background-image: url(../images/discount-background1.jpg);
+    background-image: url(../images/discount-background1.webp);
   }
   50% {
     background-image: url(../images/discount-background2.jpg);
