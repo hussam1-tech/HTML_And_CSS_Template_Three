@@ -16,12 +16,14 @@ let startSpans = false;
 let duration = 2000;
 let finalDate = new Date("Jan 1, 2028");
 window.addEventListener("click", (e) => {
-  if (e.target === linksAnc) {
-    links.classList.toggle("active");
-  } else {
-    if (links.classList.contains("active")) links.classList.remove("active");
+  if (e.target !== linksAnc && links.classList.contains("active")) {
+    links.classList.remove("active");
   }
 });
+linksAnc.addEventListener("click", (e) => {
+  e.stopPropagation();
+  links.classList.toggle("active");
+})
 let timer = setInterval(() => {
   let today = new Date();
   let waitingTime = finalDate - today;

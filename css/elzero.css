@@ -1087,6 +1087,11 @@ header .parent-ul .links ul i {
   padding-bottom: var(--section-padding, 100px);
   position: relative;
 }
+@media (max-width: 767px) {
+  .dots {
+    display: none;
+  }
+}
 .events .info {
   display: flex;
 }
